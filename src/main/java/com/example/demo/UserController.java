@@ -17,17 +17,17 @@ public class UserController { // http://localhost:8080/user/create         { JSO
     private UserService userService;
 
     @PostMapping("/create")
-    public void createUser(@RequestBody User user) {
-        userRepository.save(user);
+    public void createUser(@RequestBody UserTekwill userTekwill) {
+        userRepository.save(userTekwill);
     }
 
     @GetMapping("/all")
-    public List<User> getAllUsers() {
+    public List<UserTekwill> getAllUsers() {
         return userRepository.findAll();
     }
 
     @GetMapping("/all/paginated")
-    public Page<User> getAllUserPaginated(
+    public Page<UserTekwill> getAllUserPaginated(
             @RequestParam int page,
             @RequestParam int pageSize,
             @RequestParam(defaultValue = "") String name,

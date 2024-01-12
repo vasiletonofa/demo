@@ -7,13 +7,37 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class UserService {
 
     @Autowired
     private UserRepositoryPaginated userRepositoryPaginated;
 
-    public Page<User> getAllUsersPaginated(
+    @Autowired
+    private UserRepository userRepository;
+
+
+    public Optional<UserTekwill> getUserByName(String name) {
+        // business logic
+        return userRepository.findByName(name);
+    }
+
+    public UserTekwill createUser(UserTekwill userTekwill) {
+       return userRepository.save(userTekwill);
+    }
+
+    public List<UserTekwill> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void deleteById(Integer id) {
+        userRepository.deleteById(id);
+    }
+
+    public Page<UserTekwill> getAllUsersPaginated(
             int page,
             int pageSize,
             String name,
@@ -21,7 +45,7 @@ public class UserService {
             String sortBy,
             String direction) {
 
-        Page<User> userPage = null;
+        Page<UserTekwill> userPage = null;
         Pageable pageable = PageRequest.of(page, pageSize, Sort.Direction.valueOf(direction), sortBy);
 
         if(!role.isBlank() && !name.isBlank()) { // name = "sdsd" -> !false -> true
