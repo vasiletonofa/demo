@@ -8,7 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-public class UserController { // http://localhost:8080/user/create         { JSON USER }
+public class UserController { // http://localhost:8080/user/create         { JSON USER }        // HOW TO CREATE SOAP API
 
     @Autowired
     private UserRepository userRepository;
